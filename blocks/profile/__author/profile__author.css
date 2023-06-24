@@ -1,0 +1,26 @@
+.profile__author {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 42px;
+    line-height: 48px;
+    color: #FFFFFF;
+    margin: 0;
+    padding-right: 5px;
+    padding-bottom: 6px;
+    display: flex;
+}
+
+
+@media screen and (max-width: 768px) {
+    .profile__author {
+        margin-left: 50px;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .profile__author {
+        font-size: 27px;
+        line-height: 33px;
+        margin-left: 28px;
+    }
+}
