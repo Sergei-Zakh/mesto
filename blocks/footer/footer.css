@@ -9,3 +9,9 @@
         padding-right: 19px;
     }
 }
+
+@media screen and (max-width: 620px) {
+    .footer {
+        padding-bottom: 36px;
+    }
+}

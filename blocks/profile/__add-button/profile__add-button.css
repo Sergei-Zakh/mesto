@@ -1,5 +1,6 @@
 .profile__add-button {
     background-image: url("../../../images/Plus.svg");
+    background-size: 22px 22px;
     background-color: transparent;
     background-repeat: no-repeat;
     background-position: center;
@@ -18,7 +19,7 @@
 
 @media screen and (max-width: 768px) {
     .profile__add-button {
-        background-image: url("../../../images/Plus-mobile.svg");
+        background-size: 16px 16px;
         width: 282px;
         margin: 0;
     }
@@ -27,7 +28,6 @@
 @media screen and (max-width: 620px) {
     .profile__add-button {
         margin-top: 36px;
-        margin: 0;
     }
 
 }

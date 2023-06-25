@@ -7,7 +7,10 @@
     margin: 0;
     padding-right: 5px;
     padding-bottom: 6px;
-    display: flex;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 400px;
 }
 
 
@@ -22,5 +25,6 @@
         font-size: 27px;
         line-height: 33px;
         margin-left: 28px;
+        max-width: 220px;
     }
 }

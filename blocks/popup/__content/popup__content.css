@@ -1,7 +1,6 @@
 .popup__content {
     width: 100%;
     max-width: 430px;
-    min-height: 330px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -10,6 +9,5 @@
   @media screen and (max-width: 620px) {
     .popup__content {
       max-width: 282px;
-      min-height: 322px;
     }
   }

@@ -1,7 +1,7 @@
 const popup = document.querySelector('.popup');
 
-let nameInput = document.querySelector('.popup__input_name');
-let aboutInput = document.querySelector('.popup__input_about');
+let nameInput = document.querySelector('.popup__input_profile_name');
+let aboutInput = document.querySelector('.popup__input_profile_about');
 
 let profileAutor = document.querySelector('.profile__author');
 let profileDescription = document.querySelector('.profile__description');
@@ -15,20 +15,25 @@ function popupButtonOpenFunction(evt) {
     openPopup(popup);
 }
 
+// Из брифа по ПР4:
+// "После внесения изменений и нажатия кнопки «Сохранить» информация на странице
+//  должна обновиться, а попап автоматически закрыться"
+
 const popupButtonSave = document.querySelector('.popup__button-save');
 popupButtonSave.addEventListener('click', popupButtonSaveFunction);
+nameInput.addEventListener('submit', popupButtonSaveFunction);
+aboutInput.addEventListener('submit', popupButtonSaveFunction);
+
 function popupButtonSaveFunction(evt) {
     evt.preventDefault();
     saveChangesPopupFunction();
-    closePopup(popup);
+    closePopup();
 }
+
+
 
 const popupButtonClose = document.querySelector('.popup__button-close');
-popupButtonClose.addEventListener('click', popupButtonCloseFunction);
-function popupButtonCloseFunction(evt) {
-    closePopup(popup);
-}
-
+popupButtonClose.addEventListener('click', closePopup);
 
 function openPopup() {
     popup.classList.add('popup_opened');
@@ -47,4 +52,3 @@ function setPopupInputValueFunction(){
     nameInput.value = profileAutor.textContent;
     aboutInput.value = profileDescription.textContent;
 }
-
