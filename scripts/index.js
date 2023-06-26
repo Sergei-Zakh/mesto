@@ -10,8 +10,8 @@ let profileDescription = document.querySelector('.profile__description');
 
 function handleFormSubmit (evt) {
     evt.preventDefault();
-    profileAutor.textContent = nameInput.value;
-    profileDescription.textContent = aboutInput.value;
+    saveChangesPopupFunction();
+    closePopup();
 }
 
 formElement.addEventListener('submit', handleFormSubmit);
