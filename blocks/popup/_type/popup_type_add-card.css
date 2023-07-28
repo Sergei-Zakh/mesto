@@ -1,0 +1,5 @@
+/*.popup_type_add-card {
+    opacity: 1;
+    visibility: visible;
+    transition: visibility 0.3s ease, opacity 0.6s ease;
+}

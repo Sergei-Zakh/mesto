@@ -1,0 +1,5 @@
+/*.popup_type_edit-profile {
+    opacity: 1;
+    visibility: visible;
+    transition: visibility 0s ease, opacity 0.6s ease;
+}
