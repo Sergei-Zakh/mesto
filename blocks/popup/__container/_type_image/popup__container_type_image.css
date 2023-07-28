@@ -3,12 +3,11 @@
     align-items: center;
     position: relative;
     max-width: fit-content;
-    margin: 0 auto; 
+    margin: 0 auto;
     align-self: center;
     top: 0;
     right: 0;
     left: 0;
-    bottom: 0; 
+    bottom: 0;
     background-color: transparent;
-
 }   
