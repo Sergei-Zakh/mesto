@@ -61,13 +61,13 @@ function openPopup(activePopup) {
 }
 
 // открытие попапа профиля
-function popupButtonOpenFunction(evt) {
+function openPopupButtonFunction(evt) {
     evt.preventDefault();
     setPopupInputValueFunction();
     openPopup(popupEditProfile);
 }
 const popupEditProfileButtonOpen = document.querySelector(".profile__edit-button");
-popupEditProfileButtonOpen.addEventListener("click", popupButtonOpenFunction);
+popupEditProfileButtonOpen.addEventListener("click", openPopupButtonFunction);
 
 // default-значение полей попапа профиля
 function setPopupInputValueFunction() {
@@ -76,12 +76,12 @@ function setPopupInputValueFunction() {
 }
 
 // открытие попапа добавления карточки
-function popupAddCardButtonOpenFunction(evt) {
+function openPopupAddCardButtonFunction(evt) {
     evt.preventDefault();
     openPopup(popupAddCard);
 }
 const popupAddСardButtonOpen = document.querySelector(".profile__add-button");
-popupAddСardButtonOpen.addEventListener("click", popupAddCardButtonOpenFunction);
+popupAddСardButtonOpen.addEventListener("click", openPopupAddCardButtonFunction);
 
 
 // общая функция закрытия ЛЮБОГО попапа 
