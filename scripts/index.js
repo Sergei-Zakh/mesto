@@ -1,6 +1,7 @@
 // ul-контейнер для рендера карточек
 const elementsContainer = document.querySelector(".elements__container");
 // все попапы
+const popup = document.querySelector(".popup");
 const popupEditProfile = document.querySelector(".popup_type_edit-profile");
 const popupAddCard = document.querySelector(".popup_type_add-card");
 const popupFullscreenImage = document.querySelector(".popup_type_open-image");
@@ -109,6 +110,24 @@ function closepopupAddCard() {
 }
 const popupAddCardButtonClose = popupAddCard.querySelector(".popup__button-close");
 popupAddCardButtonClose.addEventListener("click", closepopupAddCard);
+
+// закрытие попапа через оверлей
+const popups = document.querySelectorAll('.popup');
+popups.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_opened')) {
+            closePopup(popup);
+        };
+    });
+});
+
+// закрытие попапа через Escape
+document.addEventListener('keydown', function (evt) {
+    const openedPopup = document.querySelector(".popup_opened");
+    if (evt.key === 'Escape') {
+        openedPopup.classList.remove("popup_opened");
+    }
+});
 
 // сохранение изменений в полях профиля
 function saveChangesPopupFunction() {
