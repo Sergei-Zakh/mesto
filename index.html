@@ -39,12 +39,12 @@
                 <button type="button" class="popup__button-close" aria-label="Закрыть окно"></button>
                 <div class="popup__container">
                     <h2 class="popup__title">Редактировать профиль</h2>
-                    <form name="popup" novalidate class="popup__form popup__form_edit-profile">
+                    <form name="popup" novalidate class="popup__form popup__form_edit-profile" id="popup__form_edit-profile">
                         <input id="name-input" type="text" name="input-name" required placeholder="Имя" class="popup__input popup__input_profile_name" minlength="2" maxlength="40" />
                         <span class="name-input-error popup__input-error"></span>
                         <input id="about-input" type="text" name="input-about" required placeholder="О себе" class="popup__input popup__input_profile_about" minlength="2" maxlength="200" />
                         <span class="about-input-error popup__input-error"></span>
-                        <button type="submit" class="popup__button-save" aria-label="Сохранить изменения">Сохранить</button>
+                        <button type="submit" class="popup__button-save" id="button-save_edit-profile" aria-label="Сохранить изменения">Сохранить</button>
                     </form>
                 </div>
             </div>
@@ -55,12 +55,12 @@
                 <button type="button" class="popup__button-close" aria-label="Закрыть окно"></button>
                 <div class="popup__container">
                     <h2 class="popup__title">Новое место</h2>
-                    <form name="popup" novalidate class="popup__form popup__form_add-card">
+                    <form name="popup" novalidate class="popup__form popup__form_add-card" id="popup__form_add-card">
                         <input id="mesto-input" type="text" name="input-mesto" required placeholder="Название" class="popup__input popup__input_image_name" minlength="2" maxlength="30" />
                         <span class="mesto-input-error popup__input-error"></span>
                         <input id="url-input" type="url" name="input-link" required placeholder="Ссылка на картинку" class="popup__input popup__input_image_link" />
                         <span class="url-input-error popup__input-error"></span>
-                        <button type="submit" class="popup__button-save" aria-label="Создать карточку">Создать</button>
+                        <button type="submit" class="popup__button-save" id="button-save_add-card" aria-label="Создать карточку">Создать</button>
                     </form>
                 </div>
             </div>
