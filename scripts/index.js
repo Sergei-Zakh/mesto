@@ -20,12 +20,14 @@ const fullscreenPic = popupFullscreenImage.querySelector(".popup__image");
 const fullscreenCaption = popupFullscreenImage.querySelector(".popup__caption");
 // для получения содержимого template
 const cardTemplate = document.querySelector("#element").content;
-// кнопки вызова/закрытия попапов
+// кнопки вызова/закрытия/сабмита попапов
 const popupEditProfileButton = document.querySelector(".profile__edit-button");
 const popupAddCardButton = document.querySelector(".profile__add-button");
 const popupOpenImageButtonClose = popupFullscreenImage.querySelector(".popup__button-close");
 const popupProfileButtonClose = popupEditProfile.querySelector(".popup__button-close");
 const popupAddCardButtonClose = popupAddCard.querySelector(".popup__button-close");
+const submitProfileButton = document.getElementById("button-save_edit-profile");
+const submitCardButton = document.getElementById("button-save_add-card");
 
 
 // создание карточки
@@ -68,14 +70,14 @@ initialCards.forEach((element) => {
 function openPopup(activePopup) {
     activePopup.classList.add("popup_opened");
     // слушатель закрытия на Esc добавляется при открытии модального окна
-    document.addEventListener('keydown', escapePopup);
+    document.addEventListener('keydown', handleClosePopupByEsc);
 }
 
 // открытие попапа профиля
 function openPopupEditProfileButton() {
     setProfileFormValues();
     openPopup(popupEditProfile);
-    disableProfileSubmitButton();
+    disableSubmitButton(submitProfileButton);
 }
 
 // default-значение полей попапа профиля
@@ -87,13 +89,13 @@ function setProfileFormValues() {
 // открытие попапа добавления карточки
 function openPopupAddCardButtonFunction() {
     openPopup(popupAddCard);
-    disableAddCardSubmitButton();
+    disableSubmitButton(submitCardButton);
 }
 
 // общая функция закрытия ЛЮБОГО попапа 
 function closePopup(activePopup) {
     // слушатель закрытия на Esc удаляется при закрытии попапа
-    document.removeEventListener('keydown', escapePopup);
+    document.removeEventListener('keydown', handleClosePopupByEsc);
     activePopup.classList.remove("popup_opened");
 }
 
@@ -123,7 +125,7 @@ popups.forEach((popup) => {
 });
 
 // функция закрытия попапа через Escape (вызывается при открытии попапа)
-function escapePopup(evt) {
+function handleClosePopupByEsc(evt) {
     if (evt.key === 'Escape') {
         const openedPopup = document.querySelector(".popup_opened");
         closePopup(openedPopup);
@@ -138,10 +140,10 @@ function saveChangesProfilePopup() {
 
 // сохранение изменений в полях добавления карточки + очистка полей ввода
 function saveChangesPopupAddCard() {
-    let imageName = imageNameInput.value;
-    let imageLink = imageLinkInput.value;
+    const imageName = imageNameInput.value;
+    const imageLink = imageLinkInput.value;
     cardsContainer.prepend(createCard(imageName, imageLink));
-    document.getElementById("popup__form_add-card").reset();
+    formElementAddCard.reset(); 
 }
 
 // submit попапа профиля
@@ -158,17 +160,12 @@ function handleFormSubmitAddCard(evt) {
     closePopupAddCard();
 }
 
-function disableProfileSubmitButton() {
-    const submitButton = document.getElementById("button-save_edit-profile");
+// отключение кнопок submit модальных окон
+function disableSubmitButton(submitButton) {
     submitButton.classList.add('popup__button-save_inactive');
     submitButton.disabled = true;
 }
 
-function disableAddCardSubmitButton() {
-    const submitButton = document.getElementById("button-save_add-card");
-    submitButton.classList.add('popup__button-save_inactive');
-    submitButton.disabled = true;
-}
 
 formElementProfile.addEventListener("submit", handleFormSubmitEditProfile);
 formElementAddCard.addEventListener("submit", handleFormSubmitAddCard);
