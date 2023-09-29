@@ -97,6 +97,5 @@ function enableValidation(config) {
   });
 };
 
-
 // Вызовем функцию
 enableValidation(configForm);

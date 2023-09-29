@@ -1,3 +1,15 @@
+import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
+
+const configForm = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button-save',
+    inactiveButtonClass: 'popup__button-save_inactive',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__input-error_active'
+  }; 
+
 // ul-контейнер для рендера карточек
 const cardsContainer = document.querySelector(".elements__container");
 // все попапы
@@ -15,12 +27,7 @@ const profileDescription = document.querySelector(".profile__description");
 // для добавления карточки с картинкой
 const imageNameInput = document.querySelector(".popup__input_image_name");
 const imageLinkInput = document.querySelector(".popup__input_image_link");
-// для попапа картинки-фулскрин
-const fullscreenPic = popupFullscreenImage.querySelector(".popup__image");
-const fullscreenCaption = popupFullscreenImage.querySelector(".popup__caption");
-// для получения содержимого template
-const cardTemplate = document.querySelector("#element").content;
-// кнопки вызова/закрытия/сабмита попапов
+// кнопки вызова/закрытия/submit попапов
 const popupEditProfileButton = document.querySelector(".profile__edit-button");
 const popupAddCardButton = document.querySelector(".profile__add-button");
 const popupOpenImageButtonClose = popupFullscreenImage.querySelector(".popup__button-close");
@@ -28,46 +35,13 @@ const popupProfileButtonClose = popupEditProfile.querySelector(".popup__button-c
 const popupAddCardButtonClose = popupAddCard.querySelector(".popup__button-close");
 const submitProfileButton = document.getElementById("button-save_edit-profile");
 const submitCardButton = document.getElementById("button-save_add-card");
+// экземпляры класса FormValidator
+const editProfileForm = new FormValidator(configForm, popupEditProfile); 
+const addCardForm = new FormValidator(configForm, popupAddCard); 
 
-
-// создание карточки
-function createCard(name, link) {
-    // клонируем содержимое тега template:
-    const cardElement = cardTemplate.querySelector(".element").cloneNode(true);
-    // наполняем содержимым
-    const cardImage = cardElement.querySelector(".element__image");
-    cardImage.src = link;
-    cardImage.alt = name;
-    //cardElement.querySelector(".element__image").alt = name;
-    cardElement.querySelector(".element__title").textContent = name;
-    // прикручиваем лайк
-    const buttonLike = cardElement.querySelector(".element__like-button");
-    buttonLike.addEventListener("click", () => {
-        buttonLike.classList.toggle("element__like-button_active");
-    });
-    // прикручиваем мусорку
-    cardElement.querySelector(".element__trash-button").addEventListener("click", () => cardElement.remove());
-    // прикручиваем слушатель для фулскрин-изображений 
-    cardImage.addEventListener("click", function (evt) {
-        openImagePopup(evt.target);
-    });
-    function openImagePopup() {
-        fullscreenPic.src = link;
-        fullscreenPic.alt = name;
-        fullscreenCaption.textContent = name;
-        openPopup(popupFullscreenImage);
-    }
-    // возвращаем результат
-    return cardElement;
-}
-
-// автонаполнение карточками из массива
-initialCards.forEach((element) => {
-    cardsContainer.prepend(createCard(element.name, element.link));
-});
 
 // общая функция открытия ЛЮБОГО попапа 
-function openPopup(activePopup) {
+export function openPopup(activePopup) {
     activePopup.classList.add("popup_opened");
     // слушатель закрытия на Esc добавляется при открытии модального окна
     document.addEventListener('keydown', handleClosePopupByEsc);
@@ -142,7 +116,12 @@ function saveChangesProfilePopup() {
 function saveChangesPopupAddCard() {
     const imageName = imageNameInput.value;
     const imageLink = imageLinkInput.value;
-    cardsContainer.prepend(createCard(imageName, imageLink));
+    const card = new Card (imageName, imageLink, '#element');
+    // Создаём карточку и возвращаем наружу
+    const cardElement = card.generateCard();
+    // Добавляем в DOM
+    cardsContainer.prepend(cardElement);
+    // Сброс формы
     formElementAddCard.reset(); 
 }
 
@@ -165,6 +144,11 @@ function disableSubmitButton(submitButton) {
     submitButton.classList.add('popup__button-save_inactive');
     submitButton.disabled = true;
 }
+
+
+// валидация форм
+editProfileForm.enableValidation();
+addCardForm.enableValidation();
 
 
 formElementProfile.addEventListener("submit", handleFormSubmitEditProfile);
