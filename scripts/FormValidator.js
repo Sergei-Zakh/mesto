@@ -43,7 +43,7 @@ export class FormValidator {
 
     _setEventListeners() {
         // Вызовем toggleButtonState, чтобы не ждать ввода данных в поля
-        this._toggleButtonState(this._inputList, this._submitButton);
+        this._toggleButtonState();
         // Обойдём все элементы полученной коллекции
         this._inputList.forEach((inputElement) => {
           // Каждому полю добавим обработчик события input
@@ -51,19 +51,19 @@ export class FormValidator {
             // Внутри колбэка вызовем isValid, передав ей форму и проверяемый элеме
             this._isValid(inputElement);
             // Вызовем toggleButtonState и передадим ей массив полей и кнопку
-            this._toggleButtonState(this._inputList, this._submitButton);
+            this._toggleButtonState();
           });
         });
       }; 
 
     _toggleButtonState() {
         // Если есть хотя бы один невалидный инпут
-        if (this._hasInvalidInput(this._inputList)) {
+        if (this._hasInvalidInput()) {
           // сделай кнопку неактивной
-          this._disableButton(this._submitButton);
+          this._disableButton();
         } else {
           // иначе сделай кнопку активной
-          this._enableButton(this._submitButton);
+          this._enableButton();
         }; 
       };
 
@@ -85,6 +85,13 @@ export class FormValidator {
         })
       }; 
 
+    _resetValidation() {
+        // Проходим по форме и очищаем ошибки с инпутов
+        this._inputList.forEach((inputElement) => {
+          this._hideInputError(inputElement);
+        })
+      };
+    
     enableValidation() {
         this._setEventListeners();
     };
